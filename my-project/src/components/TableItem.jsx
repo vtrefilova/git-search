@@ -1,7 +1,7 @@
-export const TableItem = ({size, children}) => {
+export const TableItem = ({children, size}) => {
     return(
-        <div className={`grid grid-cols-${size} w-full items-center h-16 pl-10 hover:bg-[#cfe2ff] border-b-[1px]`}>
+        <tr className={`grid grid-cols-${size} gap-x-2.5 items-center pl-10 py-4 border-b-[1px] bg-white hover:bg-[#E8F0FF]`}>
             {children}
-        </div>
+        </tr>
     );
 }

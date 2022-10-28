@@ -9,6 +9,7 @@ module.exports = {
       inter: ['Inter', 'sans-serif'],
       indieFlower: ['Indie Flower', 'sans-serif'],
       fuzzyBubbles: ['Fuzzy Bubbles', 'sans-serif'],
+      michroma: ['Michroma', 'sans-serif'],
     }
   },
   plugins: [],

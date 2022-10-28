@@ -5,11 +5,13 @@ import axios from 'axios';
 import { NavLink, useNavigate } from "react-router-dom";
 
 import clearImg from '../images/times.svg';
+import { CustomButton } from "./CustomButton";
 
 export const Form = () => {
     const [login, setLogin] = useState('');
     const [error, setError] = useState(false);
     const [user, setUser] = useState({});
+
 
     const navigate = useNavigate();
 
@@ -38,10 +40,12 @@ export const Form = () => {
         })
     };
 
+    const borderColor = error ? '-[#DC3545]' : '-blue-400';
+
     return(
-        <form className="flex justify-center w-full">
-            <div className="flex justify-between rounded-xl border-2 border-blue-400 h-[50px] w-11/12 max-w-2xl relative">
-                <input className="outline-none bg-transparent pl-8 pr-3" placeholder="Login" value={login} onChange={handleChange}/>
+        <div className="flex justify-center w-full">
+            <form className={`flex justify-between pt-1 pb-1 pr-1 rounded-xl border-2 border${borderColor} h-[50px] w-11/12 max-w-2xl relative`}>
+                <input className="outline-none bg-transparent pl-6 pr-3 w-9/12" placeholder="Login" value={login} onChange={handleChange}/>
                 {login ?
                 <div className="flex items-center">
                     <button
@@ -50,17 +54,13 @@ export const Form = () => {
                     >
                         <img className='h-[20px]' src={clearImg}/>
                     </button>
-                    <button 
-                        onClick={handleSubmit}
-                        type="submit"
-                        className=" tracking-wide mt-1 mr-1 mb-1 bg-[#3d8bfd] rounded-lg px-4 py-1.5 text-white font-semibold text-xl font-inter hover:opacity-90 transform transition duration-500 active:scale-90"
-                    >
+                    <CustomButton disabled={error} onClick={handleSubmit} type="submit">
                         Profile
-                    </button>
+                    </CustomButton>
                 </div> :
                 null}
-            </div>
-            { error ? <p className="absolute mt-12">User is not found. Try another login.</p> : null}
-        </form>
+            { error ? <p className="absolute top-14 text-[#DC3545]">User is not found. Try another login.</p> : null}
+            </form>
+        </div>
     );
 }
