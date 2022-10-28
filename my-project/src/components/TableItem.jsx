@@ -1,12 +1,7 @@
-import { NavLink } from "react-router-dom";
-
-export const TableItem = ({name, id, language, description, stars}) => {
+export const TableItem = ({size, children}) => {
     return(
-        <div>
-            <NavLink to={`repo+${id}`}>{name}</NavLink>
-            <span>{language || '-'}</span>
-            <span>{description || '-'}</span>
-            <span>x{stars}</span>
+        <div className={`grid grid-cols-${size} w-full items-center h-16 pl-10 hover:bg-[#cfe2ff] border-b-[1px]`}>
+            {children}
         </div>
     );
 }

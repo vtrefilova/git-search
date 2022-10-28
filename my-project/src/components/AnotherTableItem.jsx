@@ -1,9 +1,9 @@
-export const AnotherTableItem = ({name, id, language, description, stars}) => {
+export const AnotherTableItem = ({author, hash, date}) => {
     return(
-        <div>
-            <span>{language || '-'}</span>
-            <span>{description || '-'}</span>
-            <span>x{stars}</span>
+        <div className="grid grid-cols-3 w-full items-center h-16 pl-10 hover:bg-[#cfe2ff] border-b-[1px] overflow-hidden">
+            <span>{author}</span>
+            <span>{hash}</span>
+            <span className="text-right">{date}</span>
         </div>
     );
 }

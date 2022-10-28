@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      inter: ['Inter', 'sans-serif'],
+      indieFlower: ['Indie Flower', 'sans-serif'],
+      fuzzyBubbles: ['Fuzzy Bubbles', 'sans-serif'],
+    }
   },
   plugins: [],
 }
