@@ -1,5 +1,6 @@
 import { useState } from "react";
 import arrowImg from "../images/arrow.svg";
+import arrowHoverImg from "../images/arrowHover.svg";
 
 export const Dropdown = ({items, defaultValue, handleSelect}) => {
     const [isShown, setShown] = useState(false);
@@ -22,7 +23,7 @@ export const Dropdown = ({items, defaultValue, handleSelect}) => {
             className="relative"
         >
             <button
-                className='flex items-center justify-between w-[121px] p-2 gap-2 hover:text-[#3d8bfd]'
+                className='flex items-center w-[121px] p-2 gap-2 hover:text-[#3d8bfd]'
                 onClick={toggleButtonClick}
                 style={isShown ? {borderTop: 'solid #9ec5fe', borderRight: 'solid #9ec5fe', borderLeft: 'solid #9ec5fe', borderTopRightRadius: '6px', borderTopLeftRadius: '6px'} : null}
             >

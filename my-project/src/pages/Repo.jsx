@@ -5,12 +5,13 @@ import axios from 'axios';
 import { TableItem } from "../components/TableItem";
 import { Table } from "../components/Table";
 import { CustomButton } from "../components/CustomButton";
+import { Preloader } from "../components/Preloader";
 
 export const Repo = () => {
     const navigate = useNavigate();
     const [commits, setCommits] = useState([]);
     const [isFetching, setFetching] = useState(false);
-    const [isEmpty, setEmpty] = useState(true);
+    const [isEmpty, setEmpty] = useState(false);
 
     const location = useLocation();
 
@@ -28,6 +29,7 @@ export const Repo = () => {
                 setCommits(res.data)
                 setEmpty(false)
             })
+            .catch(() => setEmpty(true))
             .finally(() => setFetching(false))
         }
 
@@ -43,11 +45,11 @@ export const Repo = () => {
                     <span className='font-bold text-5xl mr-4'>{location.state.name}</span>
                     <span className='text-[#ABB5BE] opacity-60'>Last updated {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: 'long', day: 'numeric'}).format(date)}</span>
                 </div>
-                {isEmpty ? <span className="flex h-screen items-center justify-center">No commits</span> :
+                {isFetching ? <Preloader styles='top-[190px]'/> : isEmpty ? <span className="flex h-screen items-center justify-center">No commits</span> :
                     <Table size={3} titles={['Author', 'Hash', 'Date']} tableHeaderStyles="top-[190px]" tableBodyStyles="mt-[154px]">
                         {commits.map((commit) =>
                             <React.Fragment key={commit.sha}>
-                                <td className="truncate">{commit.commit.author.email}</td>
+                                <td className="break-all">{commit.commit.author.email}</td>
                                 <td className="truncate">{commit.sha}</td>
                                 <td className="text-right">{commit.commit.author.date.substr(0, 10)}</td> 
                             </React.Fragment>

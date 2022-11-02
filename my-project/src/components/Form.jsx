@@ -8,12 +8,13 @@ import clearImg from '../images/times.svg';
 import { CustomButton } from "./CustomButton";
 
 import { useDispatch, useSelector } from 'react-redux';
+import { Preloader } from "./Preloader";
 
 export const Form = () => {
     const [login, setLogin] = useState('');
     const [error, setError] = useState(false);
     const [user, setUser] = useState({});
-
+    const [isFetching, setFetching] = useState(false);
 
     const navigate = useNavigate();
 
@@ -32,19 +33,17 @@ export const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setFetching(true);
         axios.get(`https://api.github.com/users/${login}`)
         .then(res => {
             setUser(res.data);
-            console.log(res.data);
-            console.log(`/user+${login}`);
             navigate(`/user+${login}`, {state: {login: res.data.login, img: res.data.avatar_url}, replace: false});
         })
         .catch(() => {
             setError(true);
         })
+        .finally(() => setFetching(false))
     };
-
-    console.log(user);
 
     const borderColor = error ? 'border-[#DC3545]' : 'border-blue-400';
 
@@ -67,6 +66,7 @@ export const Form = () => {
                 null}
             { error ? <p className="absolute top-14 text-[#DC3545]">User is not found. Try another login.</p> : null}
             </form>
+            {isFetching && <Preloader styles='top-[70px]'/>}
         </div>
     );
 }
