@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -38,19 +38,19 @@ export const Repo = () => {
 
     return( 
         <>
-            <main className="mb-[64px] mt-24">
-                <div className="fixed inset-x-0 top-[68px] py-10 bg-white">
-                    <span className='font-bold text-5xl ml-10 mr-4'>{location.state.name}</span>
+            <main className="mb-[64px] mt-24 pb-[30px]">
+                <div className="fixed flex flex-wrap items-end inset-x-0 top-[68px] py-10 bg-white pl-10">
+                    <span className='font-bold text-5xl mr-4'>{location.state.name}</span>
                     <span className='text-[#ABB5BE] opacity-60'>Last updated {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: 'long', day: 'numeric'}).format(date)}</span>
                 </div>
                 {isEmpty ? <span className="flex h-screen items-center justify-center">No commits</span> :
                     <Table size={3} titles={['Author', 'Hash', 'Date']} tableHeaderStyles="top-[190px]" tableBodyStyles="mt-[154px]">
                         {commits.map((commit) =>
-                            <TableItem size={3} key={commit.sha}>
+                            <React.Fragment key={commit.sha}>
                                 <td className="truncate">{commit.commit.author.email}</td>
                                 <td className="truncate">{commit.sha}</td>
                                 <td className="text-right">{commit.commit.author.date.substr(0, 10)}</td> 
-                            </TableItem>
+                            </React.Fragment>
                             )}
                     </Table>
                 }

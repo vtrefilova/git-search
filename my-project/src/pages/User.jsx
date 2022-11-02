@@ -10,6 +10,8 @@ import { NavLink } from "react-router-dom";
 import starImg from "../images/star.svg";
 import { Table } from "../components/Table";
 
+import React from "react";
+
 export const User = () => {
     const [repos, setRepos] = useState([]);
     const [isFetching, setFetching] = useState(false);
@@ -37,10 +39,10 @@ export const User = () => {
                 </figure>
                 <p className='font-bold text-3xl m-8'>{location.state.login}</p>
             </header>
-            <main>
+            <main className="pb-[50px]">
                 <Table size={4} titles={['Name', 'Language', 'Description', 'Boomarks']} tableStyles='mt-[360px]' tableBodyStyles='mt-[120px]' tableHeaderStyles='top-[420px]'>
                     {repos.map(repo => 
-                        <TableItem size={4} key={repo.id}>
+                        <React.Fragment key={repo.id}>
                             <td>
                                 <NavLink 
                                     state={{username: location.state.login, name: repo.name, updationDate: repo.updated_at}}
@@ -58,7 +60,7 @@ export const User = () => {
                                     x{repo.stargazers_count}
                                 </span>
                             </td>
-                        </TableItem>)
+                        </ React.Fragment>)
                         }
                 </Table>
             </main>
